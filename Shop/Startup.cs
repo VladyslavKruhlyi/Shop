@@ -23,6 +23,7 @@ namespace Shop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +37,10 @@ namespace Shop
             {
                 app.UseExceptionHandler("/Error");
             }
+
+            app.UseStatusCodePages();
+
+            //app.UseMvcWithDefaultRoute();      
 
             app.UseStaticFiles();
 
