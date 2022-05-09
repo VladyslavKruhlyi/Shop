@@ -1,0 +1,12 @@
+﻿@using Shop.Data.Models
+
+<h1> All phones</h1>
+<h3>@Model.CurrentCategory</h3>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Phone phone in Model.AllPhones)
+        {
+            @Html.Partial("AllPhones", phone)
+        }
+    }
+</div>

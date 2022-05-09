@@ -1,0 +1,8 @@
+﻿@model Shop.Data.Models.Phone
+<div class="col-lg-4">
+    <img class="img-thumbnail" src="@Model.Image" alt="@Model.Name" />
+    <h2>Model: @Model.Name</h2>
+    <p>@Model.ShortDescription</p>
+    <p>Price: @Model.Price.ToString("c")</p>
+    <p><a class="btn btn-warning" href="#">More information </a> </p>
+</div>
