@@ -3,10 +3,10 @@
     @foreach (var item in Model.ShopCart.ListShopItems)
     {
         <div class="alert alert-warning mt-3">
-            <b>Phones:</b>@item.Phone.Name <br />
+            <b>Phone:</b>@item.Phone.Name <br />
             <b>Price:</b>@item.Phone.Price.ToString("c")
         </div>
     }
     <hr />
-    <div class="btn btn-danger" asp-conroller="Order">Pay</div>
+    <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">Pay</a>
 </div>

@@ -38,7 +38,8 @@ namespace Shop
             
             services.AddTransient<ICategory, CategoryRepository>();
             services.AddTransient<IPhone, PhoneRepository> ();
-            
+            services.AddTransient<IOrder, OrderRepository>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCart.GetCart(sp));
 
