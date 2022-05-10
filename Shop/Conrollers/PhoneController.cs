@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Data.Interfaces;
+using Shop.Data.Models;
 using Shop.ViewModels;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Shop.Conrollers
 {
@@ -14,16 +18,41 @@ namespace Shop.Conrollers
             _allPhones = iPhones;
             _allCategory = iCategory;
         }
-        
-        public ViewResult PhoneList()
+
+        [Route("Phone/PhoneList")]
+        [Route("Phone/PhoneList/{category}")]
+        public ViewResult PhoneList(string category)
         {
-            ViewBag.Title = "Page with phone";
-            PhoneListViewModel phones = new PhoneListViewModel
+            string _categoty = category;
+            IEnumerable<Phone> phones = null;
+            string phoneCategory = string.Empty;
+            if (string.IsNullOrEmpty(_categoty))
             {
-                AllPhones = _allPhones.GetAllPhones,
-                CurrentCategory = "Category"
+                phones = _allPhones.GetAllPhones.OrderBy(i => i.Id);
+            }
+            else
+            {
+                if (string.Equals("IPhone", category, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    phones = _allPhones.GetAllPhones.Where(c => c.Category.CategoryName.Equals("IPhone")).OrderBy(i => i.Id);
+                }
+                if (string.Equals("Samsung", category, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    phones = _allPhones.GetAllPhones.Where(c => c.Category.CategoryName.Equals("Samsung")).OrderBy(i => i.Id);
+                }
+                phoneCategory = _categoty;
+
+                
+            }
+            PhoneListViewModel phonesOblect = new PhoneListViewModel
+            {
+                AllPhones = phones,
+                CurrentCategory = phoneCategory
             };
-            return View(phones);
+
+
+            ViewBag.Title = "Page with phone";
+            return View(phonesOblect);
         }
     }
 }
